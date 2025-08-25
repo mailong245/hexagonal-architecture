@@ -1,0 +1,11 @@
+package com.mailong245.hexagonalarchitecture.infrastructure.persistence.repository;
+
+
+import com.mailong245.hexagonalarchitecture.infrastructure.persistence.entity.UserEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserEntityRepository extends JpaRepository<UserEntity, Long> {
+    UserEntity findByUsername(String username);
+}

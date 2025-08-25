@@ -1,0 +1,1 @@
+Use for Store entity and repository that reflected to database table
