@@ -36,4 +36,4 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=hexagonal-architecture -Dsonar.projectName='hexagonal-architecture'
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=hexagonal-architecture -Dsonar.projectName='hexagonal-architecture' -Dsonar.token=sqp_db105de64a33955a01d46ad61cf2ebf169ca1073 -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
