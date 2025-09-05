@@ -14,7 +14,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/YOUR_GITHUB_USER/YOUR_REPO.git'
+                    url: 'https://github.com/mailong245/hexagonal-architecture.git'
             }
         }
 
