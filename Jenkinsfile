@@ -6,9 +6,6 @@ pipeline {
     environment {
         JAVA_HOME = '/usr/lib/jvm/java-17-openjdk'  // update with correct path
         PATH = "${JAVA_HOME}/bin:${env.PATH}"
-    }
-
-    environment {
         SONARQUBE = 'http://localhost:9000'
     }
 
