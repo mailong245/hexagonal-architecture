@@ -8,21 +8,20 @@ pipeline {
         JAVA_HOME = '/usr/lib/jvm/java-17-openjdk'  // update with correct path
         PATH = "${JAVA_HOME}/bin:${env.PATH}"
     }
+
+    environment {
+        SONARQUBE = 'http://localhost:9000'
+    }
+
     stages {
-        stage('Build') {
+
+        stage('Check env') {
             steps {
                 sh 'java -version'
                 sh 'mvn -version'
-                sh 'mvn clean verify'
             }
         }
-    }
 
-    environment {
-        SONARQUBE = 'SonarQubeServer'
-    }
-
-    stages {
         stage('Checkout') {
             steps {
                 git branch: 'master',
@@ -47,7 +46,7 @@ pipeline {
                     sh """
                       mvn sonar:sonar \
                         -Dsonar.projectKey=hexagonal-architecture \
-                        -Dsonar.host.url=http://sonarqube:9000
+                        -Dsonar.host.url=http://localhost:9000
                     """
                 }
             }
