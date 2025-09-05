@@ -11,13 +11,9 @@ import java.math.BigDecimal;
 public class PaymentServiceAdapter implements PaymentService {
 
     @Override
-    public void charges(BigDecimal amount) {
-        try {
-            log.info("Start call payment service for charging amount {}", amount);
-            Thread.sleep(5000);
-            log.info("End call payment service for charging amount {}", amount);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+    public void charges(BigDecimal amount) throws InterruptedException {
+        log.info("Start call payment service for charging amount {}", amount);
+        Thread.sleep(5000);
+        log.info("End call payment service for charging amount {}", amount);
     }
 }

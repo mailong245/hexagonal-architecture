@@ -12,7 +12,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-public class UserController {
+class UserController {
 
     private final UserService userService;
 

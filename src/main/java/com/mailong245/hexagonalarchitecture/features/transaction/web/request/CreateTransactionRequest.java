@@ -1,4 +1,4 @@
-package com.mailong245.hexagonalarchitecture.features.transaction.web;
+package com.mailong245.hexagonalarchitecture.features.transaction.web.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Min;
@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.NonNull;
 
 @Data
 @Builder

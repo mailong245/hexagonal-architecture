@@ -2,7 +2,7 @@ package com.mailong245.hexagonalarchitecture.features.transaction.web;
 
 import com.mailong245.hexagonalarchitecture.domain.model.Transaction;
 import com.mailong245.hexagonalarchitecture.features.transaction.app.TransactionService;
-import jakarta.validation.Valid;
+import com.mailong245.hexagonalarchitecture.features.transaction.web.request.CreateTransactionRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

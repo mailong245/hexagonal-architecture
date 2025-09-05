@@ -6,15 +6,14 @@ import com.mailong245.hexagonalarchitecture.domain.port.external.NotificationSer
 import com.mailong245.hexagonalarchitecture.domain.port.external.PaymentService;
 import com.mailong245.hexagonalarchitecture.domain.port.persistence.TransactionRepository;
 import com.mailong245.hexagonalarchitecture.domain.port.persistence.UserRepository;
-import com.mailong245.hexagonalarchitecture.features.transaction.web.CreateTransactionRequest;
-import com.mailong245.hexagonalarchitecture.infrastructure.persistence.entity.UserEntity;
+import com.mailong245.hexagonalarchitecture.features.transaction.web.request.CreateTransactionRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -35,17 +34,23 @@ public class TransactionService {
     }
 
     public Transaction createTransaction(CreateTransactionRequest request) {
-        User user = userRepository.findById(request.getUserId()).orElse(null);
+        try {
+            User user = userRepository.findById(request.getUserId()).orElse(null);
 
-        Transaction transaction = Transaction.builder()
-                .user(user)
-                .amount(request.getAmount())
-                .build();
+            Transaction transaction = Transaction.builder()
+                    .user(user)
+                    .amount(request.getAmount())
+                    .build();
 
-        Transaction result = transactionRepository.createTransaction(transaction);
-        paymentService.charges(new BigDecimal(transaction.getAmount()));
-        notificationService.sendNotification("Send notification to customer");
-        return result;
+            Transaction result = transactionRepository.createTransaction(transaction);
+            paymentService.charges(new BigDecimal(transaction.getAmount()));
+
+            notificationService.sendNotification("Send notification to customer");
+            return result;
+        } catch (InterruptedException e) {
+            log.error("Error occurred while creating transaction" + Arrays.toString(e.getStackTrace()));
+            throw new RuntimeException(e);
+        }
     }
 
 }
