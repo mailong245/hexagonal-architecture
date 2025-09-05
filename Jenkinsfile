@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
+                git branch: 'master',
                     url: 'https://github.com/mailong245/hexagonal-architecture.git'
             }
         }
