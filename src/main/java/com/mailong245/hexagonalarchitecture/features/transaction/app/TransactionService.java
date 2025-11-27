@@ -20,30 +20,32 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TransactionService {
 
-    private final TransactionRepository transactionRepository;
+
+    private final TransactionRepository transactionRepositoryExtAdapter;
     private final NotificationService notificationService;
     private final PaymentService paymentService;
     private final UserRepository userRepository;
 
     public List<Transaction> getAllTransaction() {
-        return transactionRepository.getTransactionList();
+        return transactionRepositoryExtAdapter.getTransactionList();
     }
 
     public Transaction getTransactionById(String id) {
-        return transactionRepository.getTransactionDetailById(id);
+        return transactionRepositoryExtAdapter.getTransactionDetailById(id);
     }
+
 
     public Transaction createTransaction(CreateTransactionRequest request) {
         try {
-            User user = userRepository.findById(request.getUserId()).orElse(null);
+            User user = userRepository.findById(request.userId()).orElse(null);
 
             Transaction transaction = Transaction.builder()
                     .user(user)
-                    .amount(request.getAmount())
+                    .amount(request.amount())
                     .build();
 
-            Transaction result = transactionRepository.createTransaction(transaction);
-            paymentService.charges(new BigDecimal(transaction.getAmount()));
+            Transaction result = transactionRepositoryExtAdapter.createTransaction(transaction);
+            paymentService.charges(new BigDecimal(transaction.amount()));
 
             notificationService.sendNotification("Send notification to customer");
             return result;

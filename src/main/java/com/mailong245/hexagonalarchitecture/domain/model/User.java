@@ -1,18 +1,20 @@
 package com.mailong245.hexagonalarchitecture.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class User {
+public record User(
 
-    private Long id;
-    private String username;
-    private String email;
+        @JsonProperty("id")
+        Long id,
 
+        @JsonProperty("username")
+        String username,
+
+        @JsonProperty("email")
+        String email) {
 }

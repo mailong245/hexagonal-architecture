@@ -1,4 +1,4 @@
-package com.mailong245.hexagonalarchitecture.infrastructure.persistence.adapter;
+package com.mailong245.hexagonalarchitecture.infrastructure.persistence.adapter.jpa;
 
 import com.mailong245.hexagonalarchitecture.domain.model.Transaction;
 import com.mailong245.hexagonalarchitecture.domain.port.persistence.TransactionRepository;

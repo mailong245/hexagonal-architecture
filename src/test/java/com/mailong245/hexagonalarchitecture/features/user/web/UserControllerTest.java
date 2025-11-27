@@ -29,8 +29,8 @@ class UserControllerTest {
 
     @Test
     void testGetAllUser() {
-        User user1 = new User();
-        User user2 = new User();
+        User user1 = User.builder().build();
+        User user2 = User.builder().build();
         List<User> users = List.of(user1, user2);
         when(userService.getAllUser()).thenReturn(users);
 
@@ -42,7 +42,7 @@ class UserControllerTest {
 
     @Test
     void testGetUserById() {
-        User user = new User();
+        User user = User.builder().build();
         when(userService.getUserById("1")).thenReturn(user);
 
         ResponseEntity<User> response = userController.getUserById("1");
@@ -53,7 +53,7 @@ class UserControllerTest {
 
     @Test
     void testCreateUser() {
-        User user = new User();
+        User user = User.builder().build();
         when(userService.createUser(user)).thenReturn(user);
 
         ResponseEntity<User> response = userController.createUser(user);

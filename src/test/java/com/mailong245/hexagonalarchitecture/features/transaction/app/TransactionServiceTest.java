@@ -43,11 +43,9 @@ import static org.mockito.Mockito.*;
 
     @Test
     void createTransaction_success() throws InterruptedException {
-        CreateTransactionRequest request = new CreateTransactionRequest();
-        request.setUserId("user1");
-        request.setAmount("10");
+        CreateTransactionRequest request = new CreateTransactionRequest("user1", "10");
 
-        User user = new User();
+        User user = User.builder().build();
         when(userRepository.findById("user1")).thenReturn(Optional.of(user));
 
         Transaction savedTransaction = Transaction.builder().user(user).amount("10").build();
@@ -62,11 +60,9 @@ import static org.mockito.Mockito.*;
 
     @Test
     void createTransaction_interruptedException() throws InterruptedException {
-        CreateTransactionRequest request = new CreateTransactionRequest();
-        request.setUserId("user1");
-        request.setAmount("10");
+        CreateTransactionRequest request = new CreateTransactionRequest("user1", "10");
 
-        User user = new User();
+        User user = User.builder().build();
         when(userRepository.findById("user1")).thenReturn(Optional.of(user));
 
         Transaction transaction = Transaction.builder().user(user).amount("10").build();

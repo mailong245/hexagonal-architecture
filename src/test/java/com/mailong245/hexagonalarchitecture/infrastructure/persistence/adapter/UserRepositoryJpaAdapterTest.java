@@ -2,6 +2,7 @@ package com.mailong245.hexagonalarchitecture.infrastructure.persistence.adapter;
 
 
 import com.mailong245.hexagonalarchitecture.domain.model.User;
+import com.mailong245.hexagonalarchitecture.infrastructure.persistence.adapter.jpa.UserRepositoryJpaAdapter;
 import com.mailong245.hexagonalarchitecture.infrastructure.persistence.entity.UserEntity;
 import com.mailong245.hexagonalarchitecture.infrastructure.persistence.repository.UserEntityRepository;
 import org.junit.jupiter.api.Test;
@@ -37,7 +38,7 @@ public class UserRepositoryJpaAdapterTest {
         UserEntity userEntity = new UserEntity();
         userEntity.setId(1L);
         when(userEntityRepository.findById(1L)).thenReturn(Optional.of(userEntity));
-        User user = new User();
+        User user = User.builder().build();
         doReturn(user).when(modelMapper).map(userEntity, User.class);
 
         Optional<User> result = userRepositoryJpaAdapter.findById("1");
@@ -50,7 +51,7 @@ public class UserRepositoryJpaAdapterTest {
         UserEntity userEntity = new UserEntity();
         userEntity.setId(1L);
         when(userEntityRepository.findAll()).thenReturn(Arrays.asList(userEntity));
-        User user = new User();
+        User user = User.builder().build();
         doReturn(user).when(modelMapper).map(userEntity, User.class);
 
         List<User> result = userRepositoryJpaAdapter.findAllUser();
@@ -60,7 +61,7 @@ public class UserRepositoryJpaAdapterTest {
 
     @Test
     void testSave() {
-        User user = new User();
+        User user = User.builder().build();
         UserEntity userEntity = new UserEntity();
         doReturn(userEntity).when(modelMapper).map(user, UserEntity.class);
         when(userEntityRepository.save(userEntity)).thenReturn(userEntity);

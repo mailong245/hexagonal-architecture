@@ -27,7 +27,7 @@ class TransactionControllerTest {
 
     @Test
     void testGetAllTransaction() {
-        List<Transaction> transactions = List.of(new Transaction(), new Transaction());
+        List<Transaction> transactions = List.of(Transaction.builder().build(), Transaction.builder().build());
         when(transactionService.getAllTransaction()).thenReturn(transactions);
 
         ResponseEntity<List<Transaction>> response = transactionController.getAllTransaction();
@@ -39,7 +39,7 @@ class TransactionControllerTest {
     @Test
     void testGetTransactionById() {
         String id = "123";
-        Transaction transaction = new Transaction();
+        Transaction transaction = Transaction.builder().build();
         when(transactionService.getTransactionById(id)).thenReturn(transaction);
 
         ResponseEntity<Transaction> response = transactionController.getTransactionById(id);
@@ -50,8 +50,9 @@ class TransactionControllerTest {
 
     @Test
     void testCreateTransaction() {
-        CreateTransactionRequest request = new CreateTransactionRequest();
-        Transaction createdTransaction = new Transaction();
+        CreateTransactionRequest request = new CreateTransactionRequest("user1", "10");
+
+        Transaction createdTransaction = Transaction.builder().build();
         when(transactionService.createTransaction(request)).thenReturn(createdTransaction);
 
         ResponseEntity<Object> response = transactionController.createTransaction(request);

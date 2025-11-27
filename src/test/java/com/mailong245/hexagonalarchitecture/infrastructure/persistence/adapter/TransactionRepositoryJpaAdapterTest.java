@@ -1,6 +1,7 @@
 package com.mailong245.hexagonalarchitecture.infrastructure.persistence.adapter;
 
 import com.mailong245.hexagonalarchitecture.domain.model.Transaction;
+import com.mailong245.hexagonalarchitecture.infrastructure.persistence.adapter.jpa.TransactionRepositoryJpaAdapter;
 import com.mailong245.hexagonalarchitecture.infrastructure.persistence.entity.TransactionEntity;
 import com.mailong245.hexagonalarchitecture.infrastructure.persistence.repository.TransactionEntityRepository;
 import org.junit.jupiter.api.Test;
@@ -37,8 +38,8 @@ public class TransactionRepositoryJpaAdapterTest {
         TransactionEntity entity2 = new TransactionEntity();
         List<TransactionEntity> entities = Arrays.asList(entity1, entity2);
 
-        Transaction transaction1 = new Transaction();
-        Transaction transaction2 = new Transaction();
+        Transaction transaction1 = Transaction.builder().build();
+        Transaction transaction2 = Transaction.builder().build();
 
         when(transactionEntityRepository.findAll()).thenReturn(entities);
         when(modelMapper.map(entity1, Transaction.class)).thenReturn(transaction1);
@@ -55,7 +56,7 @@ public class TransactionRepositoryJpaAdapterTest {
     void testGetTransactionDetailById_Found() {
         String id = "1";
         TransactionEntity entity = new TransactionEntity();
-        Transaction transaction = new Transaction();
+        Transaction transaction = Transaction.builder().build();
 
         when(transactionEntityRepository.findById(1L)).thenReturn(Optional.of(entity));
         when(modelMapper.map(entity, Transaction.class)).thenReturn(transaction);
@@ -78,10 +79,10 @@ public class TransactionRepositoryJpaAdapterTest {
 
     @Test
     void testCreateTransaction() {
-        Transaction transaction = new Transaction();
+        Transaction transaction = Transaction.builder().build();
         TransactionEntity entity = new TransactionEntity();
         TransactionEntity savedEntity = new TransactionEntity();
-        Transaction savedTransaction = new Transaction();
+        Transaction savedTransaction = Transaction.builder().build();
 
         when(modelMapper.map(transaction, TransactionEntity.class)).thenReturn(entity);
         when(transactionEntityRepository.save(entity)).thenReturn(savedEntity);

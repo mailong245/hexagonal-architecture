@@ -24,7 +24,7 @@ class UserServiceTest {
 
     @Test
     void testGetAllUser() {
-        List<User> users = List.of(new User(), new User());
+        List<User> users = List.of(User.builder().build(), User.builder().build());
         when(userRepository.findAllUser()).thenReturn(users);
 
         List<User> result = userService.getAllUser();
@@ -35,7 +35,7 @@ class UserServiceTest {
 
     @Test
     void testGetUserById_found() {
-        User user = new User();
+        User user = User.builder().build();
         when(userRepository.findById("1")).thenReturn(java.util.Optional.of(user));
 
         User result = userService.getUserById("1");
@@ -56,7 +56,7 @@ class UserServiceTest {
 
     @Test
     void testCreateUser() {
-        User user = new User();
+        User user = User.builder().build();
         when(userRepository.save(user)).thenReturn(user);
 
         User result = userService.createUser(user);
